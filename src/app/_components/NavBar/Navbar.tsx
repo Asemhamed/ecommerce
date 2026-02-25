@@ -10,7 +10,7 @@ import imageLogo from '../../../../public/images/favicon.png'
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
-    const {logout} =useLogout()
+    const {logout} =useLogout();
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const {isAuthenticated,userInfo}=useSelector((AppState:AppState)=>AppState.auth);
     const {numOfCartItems}=useSelector((CartApp:AppState)=>CartApp.cart);

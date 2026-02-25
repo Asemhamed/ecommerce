@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 };
 
 let cartState:CartState = {
-  cartId: '',
+  cartId: null,
   products: [],
   totalCartPrice: 0,
   numOfCartItems: 0,

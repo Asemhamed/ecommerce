@@ -10,8 +10,9 @@ import OrderCard from './components/OrederCard/OrederCard';
 
 export default function Order() {
   const { userInfo } = useSelector((state: AppState) => state.auth);
-  
   const [orders, setOrders] = useState<OrderResponse | null>(null);
+  console.log(userInfo);
+  
   if(!userInfo){
     return
   }
@@ -25,11 +26,11 @@ useEffect(() => {
     setOrders(fetchedOrders);
   }
   fetchOrders();
-}, []);
+}, [userInfo?.id]);
 
-if(!orders) {
-  return 
-}
+// if(!orders) {
+//   return 
+// }
 
   if (!userInfo) {
     return (

@@ -29,10 +29,9 @@ export default function useLogout() {
         transition: Bounce,
     }); 
     
-setTimeout(() => {
     router.push('/login');
     router.refresh();
-}, 1000);
+
     }
 
     return{

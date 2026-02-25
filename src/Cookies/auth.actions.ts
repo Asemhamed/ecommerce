@@ -20,6 +20,7 @@ export async function setToken(token:string,rememberMe:boolean): Promise<void>{
     })
     }
 }
+
 export async function getToken():Promise<string|null> {
     const cookiesStore = await cookies();
     return cookiesStore.get('token')?.value || null;
