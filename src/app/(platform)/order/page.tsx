@@ -43,7 +43,6 @@ if(!orders) {
   return (
     <div className="min-h-screen bg-gray-50/50 py-12">
       <div className="container mx-auto w-[95%] lg:w-[80%] max-w-5xl">
-        {/* Header Section */}
         <div className="mb-10">
           <h1 className="text-4xl font-black text-gray-900 tracking-tight">My Orders</h1>
           <p className="text-gray-500 mt-2 font-medium">
@@ -71,7 +70,7 @@ if(!orders) {
             >
               Start Shopping
             </Link>
-          </div> }
+          </div>}
 
 
 

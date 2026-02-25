@@ -30,7 +30,7 @@ export default function useLogout() {
     }); 
     
 setTimeout(() => {
-        router.push('/login');
+    router.push('/login');
     router.refresh();
 }, 1000);
     }
