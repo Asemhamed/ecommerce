@@ -51,7 +51,7 @@ export const config = {
     '/verifyCode',
     '/cart',
     '/chechout',
-    '/order',
+    '/allorders',
     '/wishlist'
     ]
 }
