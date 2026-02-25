@@ -73,7 +73,7 @@ return <>
                                                         <p className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Account</p>
                                                         <p className="text-sm font-bold text-gray-800 truncate">{userInfo?.name || 'User'}</p>
                                                     </div>
-                                                    <Link href="/order" className="flex items-center gap-3 px-4 py-2 text-sm text-gray-600 hover:bg-green-50 hover:text-green-600 transition font-medium">
+                                                    <Link href="/allorders" className="flex items-center gap-3 px-4 py-2 text-sm text-gray-600 hover:bg-green-50 hover:text-green-600 transition font-medium">
                                                         <i className="fa-solid fa-box-open w-4"></i> My Orders
                                                     </Link>
                                                     <Link href="/wishlist" className="flex items-center gap-3 px-4 py-2 text-sm text-gray-600 hover:bg-green-50 hover:text-green-600 transition font-medium lg:hidden">

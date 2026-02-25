@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 const protectedRoutes = [
     '/cart',
     '/chechout',
-    '/order',
+    '/allorders',
     '/wishlist'
 ];
 
