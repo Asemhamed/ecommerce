@@ -9,8 +9,8 @@ export default function useLogout() {
     const router = useRouter();
     const dispatch = useDispatch();
 
-    const logout = () => {
-    clearToken();
+    const logout = async () => {
+    await clearToken();
     
     dispatch(setAuthInfo({
         isAuthenticated : false,
