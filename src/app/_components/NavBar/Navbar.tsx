@@ -117,6 +117,8 @@ return <>
                         <li><Link href="/products" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-3 rounded-xl hover:bg-green-50 hover:text-green-600 transition font-bold text-gray-700"><i className="fa-solid fa-box w-5 text-gray-400"></i> Products</Link></li>
                         <li><Link href="/wishlist" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-3 rounded-xl hover:bg-green-50 hover:text-green-600 transition font-bold text-gray-700"><i className="fa-solid fa-heart w-5 text-gray-400"></i> Wishlist</Link></li>
                         <li><Link href="/allorders" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-3 rounded-xl hover:bg-green-50 hover:text-green-600 transition font-bold text-gray-700"><i className="fa-solid fa-receipt w-5 text-gray-400"></i> My Orders</Link></li>
+                        <li><Link href="/brands" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-3 rounded-xl hover:bg-green-50 hover:text-green-600 transition font-bold text-gray-700"><i className="fa-solid fa-receipt w-5 text-gray-400"></i> Brands</Link></li>
+                        <li><Link href="/categories" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-3 rounded-xl hover:bg-green-50 hover:text-green-600 transition font-bold text-gray-700"><i className="fa-solid fa-receipt w-5 text-gray-400"></i> Categoties</Link></li>
                     </ul>
 
                     <div className="mt-auto pt-6 border-t border-gray-100">
