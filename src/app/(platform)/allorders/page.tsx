@@ -9,28 +9,7 @@ import { useSelector } from 'react-redux';
 import OrderCard from './components/OrederCard/OrederCard';
 
 export default function Order() {
-  // const { userInfo } = useSelector((state: AppState) => state.auth);
-  // const [orders, setOrders] = useState<OrderResponse | null>(null);
-  const [userID, setUserID] = useState<string|null>(null);
 
-//   if(!userInfo){
-//     return
-//   }
-//   if(!userID){
-//     return
-//   }
-
-
-
-// useEffect(() => {
-
-//   const fetchOrders = async () => {
-//     const fetchedOrders = await getUserOrders({ orderId:userID });
-//     setOrders(fetchedOrders);
-//     setUserID(userInfo?.id)
-//   }
-//   fetchOrders();
-// }, [userID]);
 
   const { userInfo } = useSelector((state:AppState) => state.auth);
   const [orders, setOrders] = useState<null|OrderResponse>(null)
@@ -42,7 +21,6 @@ export default function Order() {
   useEffect(()=>{
     const fetchOrders = async ()=>{
       const response = await getUserOrders({userId:userInfo.id})
-      // console.log(response);
       setOrders(response)
     }
     fetchOrders()
