@@ -73,7 +73,7 @@ return <>
                                                         <p className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Account</p>
                                                         <p className="text-sm font-bold text-gray-800 truncate">{userInfo?.name || 'User'}</p>
                                                     </div>
-                                                    <Link href="/allorders" className="flex items-center gap-3 px-4 py-2 text-sm text-gray-600 hover:bg-green-50 hover:text-green-600 transition font-medium">
+                                                    <Link href="/order" className="flex items-center gap-3 px-4 py-2 text-sm text-gray-600 hover:bg-green-50 hover:text-green-600 transition font-medium">
                                                         <i className="fa-solid fa-box-open w-4"></i> My Orders
                                                     </Link>
                                                     <Link href="/wishlist" className="flex items-center gap-3 px-4 py-2 text-sm text-gray-600 hover:bg-green-50 hover:text-green-600 transition font-medium lg:hidden">
@@ -117,7 +117,7 @@ return <>
                         <li><Link href="/products" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-3 rounded-xl hover:bg-green-50 hover:text-green-600 transition font-bold text-gray-700"><i className="fa-solid fa-box w-5 text-gray-400"></i> Products</Link></li>
                         <li><Link href="/wishlist" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-3 rounded-xl hover:bg-green-50 hover:text-green-600 transition font-bold text-gray-700"><i className="fa-solid fa-heart w-5 text-gray-400"></i> Wishlist</Link></li>
                         <li><Link href="/cart" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-3 rounded-xl hover:bg-green-50 hover:text-green-600 transition font-bold text-gray-700"><i className="fa-solid fa-cart-shopping w-5 text-gray-400"></i> Cart</Link></li>
-                        <li><Link href="/allorders" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-3 rounded-xl hover:bg-green-50 hover:text-green-600 transition font-bold text-gray-700"><i className="fa-solid fa-receipt w-5 text-gray-400"></i> My Orders</Link></li>
+                        <li><Link href="/order" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-3 rounded-xl hover:bg-green-50 hover:text-green-600 transition font-bold text-gray-700"><i className="fa-solid fa-receipt w-5 text-gray-400"></i> My Orders</Link></li>
                         <li><Link href="/brands" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-3 rounded-xl hover:bg-green-50 hover:text-green-600 transition font-bold text-gray-700"><i className="fa-solid fa-box w-5 text-gray-400"></i> Brands</Link></li>
                         <li><Link href="/categories" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-3 rounded-xl hover:bg-green-50 hover:text-green-600 transition font-bold text-gray-700"><i className="fa-solid fa-box w-5 text-gray-400"></i> Categoties</Link></li>
                     </ul>

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 const protectedRoutes = [
     '/cart',
     '/chechout',
-    '/allorders',
+    '/order',
     '/wishlist'
 ];
 
@@ -51,7 +51,7 @@ export const config = {
     '/verifyCode',
     '/cart',
     '/chechout',
-    '/allorders',
+    '/order',
     '/wishlist'
     ]
 }
