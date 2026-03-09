@@ -2,8 +2,6 @@
 import { AppState } from '@/Store/auth.store';
 import { OrderResponse } from '@/Types/OrderTypes';
 import { getUserOrders } from '@/serverAPIs/OrderActions';
-import { ShoppingBag } from 'lucide-react';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import OrderCard from './components/OrederCard/OrederCard';

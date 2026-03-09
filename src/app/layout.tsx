@@ -40,7 +40,7 @@ let cartState:CartState = {
   error: null,
   IsLoading: false,
 }
-    let wishlistState:WishlistState={
+let wishlistState:WishlistState={
     status: "success",
     count: 0,
     data: [] ,

@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { Bounce, toast } from 'react-toastify';
 import { setAuthInfo } from '../strore/auth.slice';
+import { clearCart } from '@/app/(platform)/cart/Store/slice.cart';
+import { clearWishlist } from '@/app/(platform)/wishlist/Store/Slice.wishlist';
 
 export default function useLogout() {
     const router = useRouter();
@@ -28,7 +30,6 @@ export default function useLogout() {
         theme: "light",
         transition: Bounce,
     }); 
-    
     router.push('/login');
     router.refresh();
 

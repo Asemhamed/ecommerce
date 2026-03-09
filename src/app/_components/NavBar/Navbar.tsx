@@ -40,7 +40,7 @@ return <>
                                     <i className="fa-regular fa-heart text-xl"></i>
                                     {count > 0 && (
                                         <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
-                                            {count}
+                                            {isAuthenticated?count:0}
                                         </span>
                                     )}
                                 </Link>
@@ -48,7 +48,7 @@ return <>
                                 <Link href="/cart" className="relative group text-gray-600 hover:text-green-600 transition">
                                     <i className="fa-solid fa-cart-shopping text-xl"></i>
                                     <span className="absolute -top-2 -right-2 bg-green-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
-                                        {numOfCartItems}
+                                        {isAuthenticated?numOfCartItems:0}
                                     </span>
                                 </Link>
                             </div>
