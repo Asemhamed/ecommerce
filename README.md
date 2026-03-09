@@ -34,3 +34,22 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+🛠️ Core Tech Stack
+    .Framework: Next.js (App Router) & TypeScript
+
+    .Styling: Tailwind CSS (Custom Design)
+
+    .Components: Shadcn UI & Lucide React Icons
+
+    .State Management: TanStack Query & Redux
+
+✨ Key UI Features
+    .Responsive Layouts: Optimized navigation with mobile-specific side-drawers and hamburger menus.
+
+    .Dynamic Catalog: Real-time product filtering, category sliders, and search functionality.
+
+    .Optimized Checkout: Smooth shopping cart logic with persistent state management.
+
+    .Modern Forms: Robust profile management and photo upload features using React Hook Form and Zod.
