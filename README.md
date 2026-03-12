@@ -1,4 +1,4 @@
-FreshCart is my very first e-commerce project, built with React.js!
+FreshCart is my very first e-commerce project, built with Next.js!
 FreshCart is a modern e-commerce web application designed to streamline the online shopping experience. From browsing and purchasing to managing orders, this platform leverages the latest technologies to deliver a seamless and intuitive user experience.
 
 🌟🤍 Key Features:-
@@ -61,7 +61,7 @@ Axios for API requests
 React Query (TanStack) for server state management
 Axios & Hooks
 Zod for form validation
-Protected Routes with React Router DOM
+Protected Routes with Next Proxy
 Toaster for notifications
 Slick Carousel
 
