@@ -74,25 +74,6 @@ export default function Order() {
               <OrderCard key={order.id} order={order} />
             ))}
           </div>
-          {/* : 
-          <div className="bg-white rounded-3xl p-12 text-center border border-dashed border-gray-300">
-            <div className="bg-gray-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <ShoppingBag className="text-gray-300" size={40} />
-            </div>
-            <h2 className="text-2xl font-bold text-gray-900">No orders found</h2>
-            <p className="text-gray-500 max-w-sm mx-auto mt-2">
-              Looks like you haven't placed any orders yet. Start shopping to see your orders here!
-            </p>
-            <Link 
-              href="/products" 
-              className="mt-8 inline-block bg-green-600 text-white font-bold px-8 py-3 rounded-2xl hover:bg-green-700 transition-all shadow-lg shadow-green-100"
-            >
-              Start Shopping
-            </Link>
-          </div>} */}
-
-
-
       </div>
     </div>
   );
