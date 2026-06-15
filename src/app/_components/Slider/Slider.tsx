@@ -5,10 +5,37 @@ import Image from 'next/image';
 import { category } from '@/Types/APIsType';
 import { Autoplay } from 'swiper/modules';
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
     
 export default function Slider({allCategories}:{allCategories:category[]}) {
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (sliderRef.current) {
+      gsap.fromTo(
+        sliderRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: sliderRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }
+  }, []);
+
   return<>
-    <section className="container mx-auto w-[95%] lg:w-[90%] py-10">
+    <section ref={sliderRef} className="container mx-auto w-[95%] lg:w-[90%] py-10">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Shop Popular Categories</h2>
         <div className="h-1 flex-grow mx-4 bg-white rounded-full hidden md:block"></div>

@@ -1,7 +1,14 @@
+'use client'
+
 import { Headphones, RotateCcw, ShieldCheck, Truck } from 'lucide-react';
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function HomeBanner() {
+const containerRef = useRef<HTMLDivElement>(null);
 const features = [
     {
       icon: <Truck className="w-6 h-6" />,
@@ -25,12 +32,42 @@ const features = [
     }
   ];
 
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const featureCards = containerRef.current.querySelectorAll('[data-feature]');
+    
+    featureCards.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: index * 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
 return <>
-        <div className="w-full bg-white border-y border-gray-100 py-10 px-6">
+        <div ref={containerRef} className="w-full bg-white border-y border-gray-100 py-10 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {features.map((item, index) => (
           <div 
-            key={index} 
+            key={index}
+            data-feature
             className="flex items-center space-x-4 group shadow p-4 rounded-xl transition-colors hover:bg-slate-50"
           >
             {/* Icon Container */}

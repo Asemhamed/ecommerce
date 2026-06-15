@@ -19,6 +19,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 
 
@@ -26,6 +31,29 @@ export default function ProductCard({product}:{product:Product}) {
     const {isAuthenticated}=useSelector((appStates:AppState)=>appStates.auth)
     const dispatch = useAppDispatch();
     const router = useRouter()
+    const cardRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+      // Scroll animation for product cards
+      if (cardRef.current) {
+        gsap.fromTo(
+          cardRef.current,
+          { opacity: 0, y: 30, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: cardRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+    }, []);
 
     async function handleAddToCart() {
       if(isAuthenticated){
@@ -67,7 +95,7 @@ export default function ProductCard({product}:{product:Product}) {
       }
     }
     return <>
-<Card className="group relative mx-auto w-full max-w-sm overflow-hidden border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+<Card ref={cardRef} className="group relative mx-auto w-full max-w-sm overflow-hidden border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
 
 
       <div className="relative aspect-[4/5] overflow-hidden bg-gray-50">

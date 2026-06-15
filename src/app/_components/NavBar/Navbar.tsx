@@ -3,9 +3,10 @@ import { AppState } from '@/Store/auth.store'
 import useLogout from '@/app/(auth)/Hook/logout'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import imageLogo from '../../../../public/images/favicon.png'
+import gsap from 'gsap'
 
 
 export default function Navbar() {
@@ -15,9 +16,21 @@ export default function Navbar() {
     const {isAuthenticated,userInfo}=useSelector((AppState:AppState)=>AppState.auth);
     const {numOfCartItems}=useSelector((CartApp:AppState)=>CartApp.cart);
     const {count} = useSelector((appState:AppState)=>appState.wishlist);
+    const navRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+      // Navbar entrance animation
+      if (navRef.current) {
+        gsap.fromTo(
+          navRef.current,
+          { opacity: 0, y: -20 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
+        );
+      }
+    }, []);
 
 return <>
-<div className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
+<div ref={navRef} className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50" data-navbar>
                 <nav className="container mx-auto w-[95%] lg:w-[90%] py-3">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-8">

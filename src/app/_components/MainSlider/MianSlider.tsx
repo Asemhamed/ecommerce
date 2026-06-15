@@ -6,10 +6,24 @@ import Image2 from '../../../../public/images/slider-image-2.jpeg'
 import Image3 from '../../../../public/images/slider-image-3.jpeg'
 import Image from 'next/image';
 import { Autoplay, Pagination } from 'swiper/modules';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
 
 export default function MianSlider() {
+const sliderRef = useRef<HTMLDivElement>(null);
+
+useEffect(() => {
+  if (sliderRef.current) {
+    gsap.fromTo(
+      sliderRef.current,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
+    );
+  }
+}, []);
+
 return<>
-<section className="container mx-auto w-[95%] lg:w-[90%] py-8">
+<section ref={sliderRef} className="container mx-auto w-[95%] lg:w-[90%] py-8">
       <div className="grid grid-cols-12 gap-0 overflow-hidden rounded-2xl shadow-sm border border-gray-100">
         
         <div className="col-span-12 lg:col-span-8">
