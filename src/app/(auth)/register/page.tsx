@@ -9,16 +9,37 @@ import { RegisterSchema, RegisterType } from "@/Schema/Auth.Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Bounce } from "react-toastify/unstyled";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import { gsap } from "gsap";
 
 
 export default function Register() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const cardRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(cardRef.current,
+        { opacity: 0, y: 35 },
+        { opacity: 1, y: 0, duration: 0.65, ease: "power2.out" }
+      );
+
+      if (formRef.current) {
+        gsap.fromTo(Array.from(formRef.current.children),
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "power2.out", delay: 0.2 }
+        );
+      }
+    });
+    return () => ctx.revert();
+  }, []);
 
   const { handleSubmit, control, register, reset } = useForm<RegisterType>({
     resolver: zodResolver(RegisterSchema),
@@ -89,16 +110,17 @@ export default function Register() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50/50 py-12 px-4">
-      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-        <div className="text-center">
-          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
-            Create Account 
-          </h1>
-          <p className="mt-2 text-sm text-gray-500">
-            Enter your details to get started
-          </p>
-        </div>
-        <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-5">
+      <div className="max-w-md w-full">
+        <div ref={cardRef} className="space-y-8 bg-white p-8 rounded-xl shadow-lg border border-gray-100" style={{ opacity: 0 }}>
+          <div className="text-center">
+            <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+              Create Account 
+            </h1>
+            <p className="mt-2 text-sm text-gray-500">
+              Enter your details to get started
+            </p>
+          </div>
+          <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-5 [&>div]:opacity-0 [&>button]:opacity-0 [&>p]:opacity-0">
           {/* Name Field */}
           <Controller
             name="name"
@@ -248,6 +270,7 @@ export default function Register() {
             </button>
           </p>
         </form>
+        </div>
       </div>
     </div>
   );

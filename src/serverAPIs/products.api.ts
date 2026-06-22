@@ -23,4 +23,17 @@ import { Product } from "@/Types/APIsType";
             throw error
         }
         
-}
+    }
+
+    export async function getProductByCategory(category:string):Promise<Product[]>{
+        try{
+        const res = await fetch(`https://ecommerce.routemisr.com/api/v1/products?category=${category}`,{
+            next: {revalidate: 60*60*24}
+        })
+        const {data} = await res.json();
+        return data;
+        }catch(error){
+            throw error
+        }
+        
+    }

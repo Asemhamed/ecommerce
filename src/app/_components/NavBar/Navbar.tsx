@@ -3,9 +3,10 @@ import { AppState } from '@/Store/auth.store'
 import useLogout from '@/app/(auth)/Hook/logout'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import imageLogo from '../../../../public/images/favicon.png'
+import { gsap } from 'gsap'
 
 
 export default function Navbar() {
@@ -16,17 +17,76 @@ export default function Navbar() {
     const {numOfCartItems}=useSelector((CartApp:AppState)=>CartApp.cart);
     const {count} = useSelector((appState:AppState)=>appState.wishlist);
 
+    const logoRef = useRef<HTMLDivElement>(null);
+    const linksContainerRef = useRef<HTMLUListElement>(null);
+    const rightContainerRef = useRef<HTMLDivElement>(null);
+    const cartBadgeRef = useRef<HTMLSpanElement>(null);
+    const wishlistBadgeRef = useRef<HTMLSpanElement>(null);
+
+    const isFirstCartRun = useRef(true);
+    const isFirstWishlistRun = useRef(true);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.fromTo(logoRef.current,
+                { opacity: 0, x: -20 },
+                { opacity: 1, x: 0, duration: 0.6, ease: 'power2.out' }
+            );
+
+            if (linksContainerRef.current) {
+                gsap.fromTo(linksContainerRef.current.children,
+                    { opacity: 0, y: -10 },
+                    { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out', delay: 0.1 }
+                );
+            }
+
+            gsap.fromTo(rightContainerRef.current,
+                { opacity: 0, x: 20 },
+                { opacity: 1, x: 0, duration: 0.6, ease: 'power2.out', delay: 0.2 }
+            );
+        });
+        return () => ctx.revert();
+    }, []);
+
+    useEffect(() => {
+        if (isFirstCartRun.current) {
+            isFirstCartRun.current = false;
+            return;
+        }
+        if (cartBadgeRef.current && numOfCartItems > 0) {
+            gsap.fromTo(cartBadgeRef.current,
+                { scale: 0.6 },
+                { scale: 1.25, duration: 0.15, yoyo: true, repeat: 1, ease: 'power1.out' }
+            );
+        }
+    }, [numOfCartItems]);
+
+    useEffect(() => {
+        if (isFirstWishlistRun.current) {
+            isFirstWishlistRun.current = false;
+            return;
+        }
+        if (wishlistBadgeRef.current && count > 0) {
+            gsap.fromTo(wishlistBadgeRef.current,
+                { scale: 0.6 },
+                { scale: 1.25, duration: 0.15, yoyo: true, repeat: 1, ease: 'power1.out' }
+            );
+        }
+    }, [count]);
+
 return <>
 <div className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
                 <nav className="container mx-auto w-[95%] lg:w-[90%] py-3">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-8">
-                            <Link href="/" className="flex items-center gap-2">
-                                <Image src={imageLogo} alt="FreshCart Logo" className="w-9 h-9" />
-                                <span className="font-black text-xl text-green-600 tracking-tight">FreshCart</span>
-                            </Link>
+                            <div ref={logoRef} style={{ opacity: 0 }}>
+                                <Link href="/" className="flex items-center gap-2">
+                                    <Image src={imageLogo} alt="FreshCart Logo" className="w-9 h-9" />
+                                    <span className="font-black text-xl text-green-600 tracking-tight">FreshCart</span>
+                                </Link>
+                            </div>
 
-                            <ul className="hidden lg:flex gap-6 items-center">
+                            <ul ref={linksContainerRef} className="hidden lg:flex gap-6 items-center [&>li]:opacity-0">
                                 <li><Link href="/" className="text-sm font-bold text-gray-700 hover:text-green-600 transition">Home</Link></li>
                                 <li><Link href="/products" className="text-sm font-bold text-gray-700 hover:text-green-600 transition">Products</Link></li>
                                 <li><Link href="/brands" className="text-sm font-bold text-gray-700 hover:text-green-600 transition">Brands</Link></li>
@@ -34,21 +94,29 @@ return <>
                             </ul>
                         </div>
 
-                        <div className="hidden lg:flex gap-6 items-center">
+                        <div ref={rightContainerRef} className="hidden lg:flex gap-6 items-center" style={{ opacity: 0 }}>
                             <div className="flex items-center gap-5 border-r pr-6 border-gray-200">
                                 <Link href="/wishlist" className="relative group text-gray-600 hover:text-red-500 transition">
                                     <i className="fa-regular fa-heart text-xl"></i>
-                                    {count > 0 && (
-                                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
-                                            {isAuthenticated?count:0}
-                                        </span>
-                                    )}
+                                    <span 
+                                        ref={wishlistBadgeRef}
+                                        className={`absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center transition-all ${
+                                            (isAuthenticated && count > 0) ? 'scale-100 opacity-100' : 'scale-0 opacity-0 pointer-events-none'
+                                        }`}
+                                    >
+                                        {isAuthenticated ? count : 0}
+                                    </span>
                                 </Link>
 
                                 <Link href="/cart" className="relative group text-gray-600 hover:text-green-600 transition">
                                     <i className="fa-solid fa-cart-shopping text-xl"></i>
-                                    <span className="absolute -top-2 -right-2 bg-green-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
-                                        {isAuthenticated?numOfCartItems:0}
+                                    <span 
+                                        ref={cartBadgeRef}
+                                        className={`absolute -top-2 -right-2 bg-green-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center transition-all ${
+                                            (isAuthenticated && numOfCartItems > 0) ? 'scale-100 opacity-100' : 'scale-0 opacity-0 pointer-events-none'
+                                        }`}
+                                    >
+                                        {isAuthenticated ? numOfCartItems : 0}
                                     </span>
                                 </Link>
                             </div>

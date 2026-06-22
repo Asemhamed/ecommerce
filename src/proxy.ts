@@ -15,43 +15,43 @@ const AuthRoutes = [
     '/verifyCode',
 ]
 
-export function proxy(request:NextRequest){
-    const {pathname}=request.nextUrl;
+export function proxy(request: NextRequest) {
+    const { pathname } = request.nextUrl;
     const token = request.cookies.get('token')?.value;
 
     const isAuthenticated = !!token;
 
     const isProtectedRoute = protectedRoutes.some(
-        (route)=> route == pathname || pathname.startsWith(`${route}/`)
-        );
+        (route) => route == pathname || pathname.startsWith(`${route}/`)
+    );
 
     const isAuthRoute = AuthRoutes.some(
-        (route)=> route == pathname || pathname.startsWith(`${route}/`)
-        );
+        (route) => route == pathname || pathname.startsWith(`${route}/`)
+    );
 
-        if(isProtectedRoute && !isAuthenticated){
-            return NextResponse.redirect(new URL('/login',request.url))
-        }
-        if(isAuthRoute && isAuthenticated){
-            return NextResponse.redirect(new URL('/',request.url))
-        }
+    if (isProtectedRoute && !isAuthenticated) {
+        return NextResponse.redirect(new URL('/login', request.url))
+    }
+    // if(isAuthRoute && isAuthenticated){
+    //     return NextResponse.redirect(new URL('/',request.url))
+    // }
 
 
-        return NextResponse.next();
+    return NextResponse.next();
 
 }
 
 
 export const config = {
-    matcher:[
-    '/login',
-    '/register',
-    '/resetPassword',
-    '/forgotPassword',
-    '/verifyCode',
-    '/cart',
-    '/chechout',
-    '/order',
-    '/wishlist'
+    matcher: [
+        '/login',
+        '/register',
+        '/resetPassword',
+        '/forgotPassword',
+        '/verifyCode',
+        '/cart',
+        '/chechout',
+        '/order',
+        '/wishlist'
     ]
 }

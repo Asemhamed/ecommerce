@@ -1,5 +1,6 @@
 import { Headphones, RotateCcw, ShieldCheck, Truck } from 'lucide-react';
 import React from 'react'
+import GsapStagger from '@/components/shared/GsapStagger';
 
 export default function HomeBanner() {
 const features = [
@@ -27,7 +28,7 @@ const features = [
 
 return <>
         <div className="w-full bg-white border-y border-gray-100 py-10 px-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <GsapStagger className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" staggerAmount={0.1}>
         {features.map((item, index) => (
           <div 
             key={index} 
@@ -49,7 +50,7 @@ return <>
             </div>
           </div>
         ))}
-      </div>
+      </GsapStagger>
     </div>
     </>
 }

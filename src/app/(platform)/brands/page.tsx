@@ -2,6 +2,8 @@ import { getAllBrands } from '@/serverAPIs/BrandActins';
 import { ArrowRight, Building2 } from 'lucide-react';
 import Link from 'next/link';
 import { Metadata } from "next";
+import GsapStagger from '@/components/shared/GsapStagger';
+import PageWrapper from '@/components/shared/PageWrapper';
 
 export const metadata: Metadata = {
   title: "Brand",
@@ -13,7 +15,8 @@ export default async function page() {
  
   const brands = await getAllBrands();
   return (
-    <div className="min-h-screen bg-gray-50/50">
+    <PageWrapper>
+      <div className="min-h-screen bg-gray-50/50">
       <div className="bg-white border-b border-gray-200">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
@@ -28,7 +31,7 @@ export default async function page() {
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         {brands.length > 0 ? (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+          <GsapStagger className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6" staggerAmount={0.04}>
             {brands.map((brand) => (
               <Link
                 key={brand._id}
@@ -50,7 +53,7 @@ export default async function page() {
                 </div>
               </Link>
             ))}
-          </div>
+          </GsapStagger>
         ) : (
           <div className="text-center py-20">
             <Building2 className="mx-auto h-12 w-12 text-gray-300" />
@@ -59,6 +62,7 @@ export default async function page() {
           </div>
         )}
       </div>
-    </div>
+      </div>
+    </PageWrapper>
   );
 }

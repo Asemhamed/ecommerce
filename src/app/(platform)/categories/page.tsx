@@ -1,6 +1,8 @@
 import { CategoryCard } from '@/app/_components/CategoryCard/CategoryCard';
 import { getAllCategories } from '@/serverAPIs/Categories';
 import { LayoutGrid, SlidersHorizontal } from 'lucide-react';
+import GsapStagger from '@/components/shared/GsapStagger';
+import PageWrapper from '@/components/shared/PageWrapper';
 
 import { Metadata } from "next";
 
@@ -12,11 +14,12 @@ export const metadata: Metadata = {
 export default async function Categories() {
       const allCategories= await getAllCategories();
       
-  return<>
-    <div className="min-h-screen bg-white">
-      <div className="bg-gray-50 border-b border-gray-200">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <nav className="flex mb-4 text-sm font-medium text-gray-500">
+  return (
+    <PageWrapper>
+      <div className="min-h-screen bg-white">
+        <div className="bg-gray-50 border-b border-gray-200">
+          <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+            <nav className="flex mb-4 text-sm font-medium text-gray-500">
             <ol className="flex items-center space-x-2">
               <li>Home</li>
               <li>/</li>
@@ -45,14 +48,15 @@ export default async function Categories() {
                 <span className="text-sm text-gray-500 ml-2">Showing {allCategories.length} products</span>
               </div>
             </div>
-            <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 xl:grid-cols-3">
+            <GsapStagger className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 xl:grid-cols-3" staggerAmount={0.06}>
               {allCategories.map((category) =><CategoryCard key={category._id} category={category} />)}
-            </div>
+            </GsapStagger>
 
           </main>
 
         </div>
       </div>
     </div>
-    </>
+    </PageWrapper>
+  )
 }

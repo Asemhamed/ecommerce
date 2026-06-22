@@ -1,8 +1,11 @@
 import React from 'react'
 import WishlistScreen from './Components/WishlistScreen/WishlistScreen'
+import PageWrapper from '@/components/shared/PageWrapper'
 
 export default function page() {
-  return<>
-    <WishlistScreen/>
-  </>
+  return (
+    <PageWrapper>
+      <WishlistScreen/>
+    </PageWrapper>
+  )
 }

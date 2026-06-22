@@ -6,13 +6,34 @@ import Image2 from '../../../../public/images/slider-image-2.jpeg'
 import Image3 from '../../../../public/images/slider-image-3.jpeg'
 import Image from 'next/image';
 import { Autoplay, Pagination } from 'swiper/modules';
+import { useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
 
 export default function MianSlider() {
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const sideBannersRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(sliderRef.current,
+        { opacity: 0, x: -30 },
+        { opacity: 1, x: 0, duration: 0.8, ease: 'power2.out' }
+      );
+      if (sideBannersRef.current) {
+        gsap.fromTo(sideBannersRef.current.children,
+          { opacity: 0, x: 30 },
+          { opacity: 1, x: 0, duration: 0.8, stagger: 0.15, ease: 'power2.out', delay: 0.1 }
+        );
+      }
+    });
+    return () => ctx.revert();
+  }, []);
+
 return<>
 <section className="container mx-auto w-[95%] lg:w-[90%] py-8">
       <div className="grid grid-cols-12 gap-0 overflow-hidden rounded-2xl shadow-sm border border-gray-100">
         
-        <div className="col-span-12 lg:col-span-8">
+        <div ref={sliderRef} className="col-span-12 lg:col-span-8" style={{ opacity: 0 }}>
           <Swiper
             modules={[Autoplay, Pagination]}
             slidesPerView={1}
@@ -46,7 +67,7 @@ return<>
           </Swiper>
         </div>
 
-        <div className="hidden lg:flex lg:col-span-4 flex-col">
+        <div ref={sideBannersRef} className="hidden lg:flex lg:col-span-4 flex-col [&>*]:opacity-0">
           <div className="relative h-1/2 w-full">
             <Image 
               src={Image2} 

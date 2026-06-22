@@ -10,11 +10,12 @@ import { LoginSchema, LoginType } from "@/Schema/Auth.Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff, Loader2, LockKeyhole, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { Bounce } from "react-toastify/unstyled";
 import { setAuthInfo } from "../strore/auth.slice";
+import { gsap } from "gsap";
 
 
 export default function Login() {
@@ -22,6 +23,26 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
+
+  const cardRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(cardRef.current,
+        { opacity: 0, y: 35 },
+        { opacity: 1, y: 0, duration: 0.65, ease: "power2.out" }
+      );
+
+      if (formRef.current) {
+        gsap.fromTo(Array.from(formRef.current.children),
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "power2.out", delay: 0.2 }
+        );
+      }
+    });
+    return () => ctx.revert();
+  }, []);
 
   const { handleSubmit, control, reset,register ,setError } = useForm<LoginType>({
     resolver: zodResolver(LoginSchema),
@@ -81,7 +102,7 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-100 via-slate-50 to-gray-200 py-12 px-4">
       <div className="max-w-md w-full">
-        <div className="bg-white/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-white/20">
+        <div ref={cardRef} className="bg-white/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-white/20" style={{ opacity: 0 }}>
 
           <div className="text-center mb-10">
             <div className="mx-auto h-12 w-12 bg-green-100 flex items-center justify-center rounded-xl mb-4">
@@ -95,7 +116,7 @@ export default function Login() {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="space-y-6 [&>div]:opacity-0 [&>button]:opacity-0">
             
             {/* Email Field */}
             <Controller
