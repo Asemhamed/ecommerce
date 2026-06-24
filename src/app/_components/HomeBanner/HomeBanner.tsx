@@ -1,56 +1,57 @@
 import { Headphones, RotateCcw, ShieldCheck, Truck } from 'lucide-react';
-import React from 'react'
 import GsapStagger from '@/components/shared/GsapStagger';
 
-export default function HomeBanner() {
 const features = [
-    {
-      icon: <Truck className="w-6 h-6" />,
-      title: "Free Delivery",
-      desc: "Orders over $50 or more"
-    },
-    {
-      icon: <RotateCcw className="w-6 h-6" />,
-      title: "30 Days Return",
-      desc: "Satisfaction guaranteed"
-    },
-    {
-      icon: <ShieldCheck className="w-6 h-6" />,
-      title: "Secure Payment",
-      desc: "100% protected checkout"
-    },
-    {
-      icon: <Headphones className="w-6 h-6" />,
-      title: "24/7 Support",
-      desc: "Ready to help you anytime"
-    }
-  ];
+  {
+    icon: <Truck className="w-6 h-6" />,
+    iconBg: "bg-blue-50 text-blue-500",
+    title: "Free Shipping",
+    desc: "On orders over 500 EGP",
+  },
+  {
+    icon: <ShieldCheck className="w-6 h-6" />,
+    iconBg: "bg-green-50 text-green-500",
+    title: "Secure Payment",
+    desc: "100% secure transactions",
+  },
+  {
+    icon: <RotateCcw className="w-6 h-6" />,
+    iconBg: "bg-orange-50 text-orange-500",
+    title: "Easy Returns",
+    desc: "14-day return policy",
+  },
+  {
+    icon: <Headphones className="w-6 h-6" />,
+    iconBg: "bg-purple-50 text-purple-500",
+    title: "24/7 Support",
+    desc: "Dedicated support team",
+  },
+];
 
-return <>
-        <div className="w-full bg-white border-y border-gray-100 py-10 px-6">
-      <GsapStagger className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" staggerAmount={0.1}>
+export default function HomeBanner() {
+  return (
+    <div className="w-full bg-white border-y border-gray-100 py-5 px-4">
+      <GsapStagger
+        className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+        staggerAmount={0.1}
+      >
         {features.map((item, index) => (
-          <div 
-            key={index} 
-            className="flex items-center space-x-4 group shadow p-4 rounded-xl transition-colors hover:bg-slate-50"
+          <div
+            key={index}
+            className="flex items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
           >
-            {/* Icon Container */}
-            <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-green-50 text-green-600 group-hover:bg-green-600 group-hover:text-white transition-all duration-300">
+            <div
+              className={`flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full ${item.iconBg}`}
+            >
               {item.icon}
             </div>
-            
-            {/* Text Content */}
             <div>
-              <h3 className="font-bold text-gray-900 text-sm uppercase tracking-wider">
-                {item.title}
-              </h3>
-              <p className="text-gray-500 text-sm">
-                {item.desc}
-              </p>
+              <h3 className="font-bold text-gray-900 text-sm">{item.title}</h3>
+              <p className="text-gray-500 text-xs mt-0.5">{item.desc}</p>
             </div>
           </div>
         ))}
       </GsapStagger>
     </div>
-    </>
+  );
 }

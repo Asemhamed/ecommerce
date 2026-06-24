@@ -11,6 +11,7 @@ export type Product = {
     price:number,
     imageCover:string,
     ratingsAverage:number,
+    ratingsQuantity:number,
     createdAt:string,
     updatedAt:string,
     category:category,

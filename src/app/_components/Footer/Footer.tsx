@@ -1,113 +1,139 @@
-
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
 import { Button } from '@/components/ui/button';
-import MasterCard from '../../../../public/images/mastercard.webp'
-import Paypal from '../../../../public/images/paypal.png'
-import Amazon from '../../../../public/images/amazon-pay.png'
-import AmericanImage from '../../../../public/images/American-Express-Color.png'
-import GetGoogle from '../../../../public/images/get-google-play.png'
-import GetApple from '../../../../public/images/get-apple-store.png'
-import logo from '../../../../public/images/freshcart-logo.svg'
+import MasterCard from '../../../../public/images/mastercard.webp';
+import Paypal from '../../../../public/images/paypal.png';
+import Amazon from '../../../../public/images/amazon-pay.png';
+import AmericanImage from '../../../../public/images/American-Express-Color.png';
 import Image from "next/image";
 import Link from "next/link";
-
+import { Facebook, Twitter, Instagram, Youtube, Phone, Mail, MapPin, ShoppingCart } from "lucide-react";
 
 export default function Footer() {
-  return <>
+  return (
+    <footer className="bg-gray-900 text-gray-300 mt-16">
 
-<footer className="bg-gray-100 mt-16 border-t border-gray-200">
-      <div className="container mx-auto w-[95%] lg:w-[90%] py-12">
-        
-        {/* Top Section: Branding and Links */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+      {/* Main Footer Content */}
+      <div className="container mx-auto w-[95%] lg:w-[90%] py-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
+          {/* Brand Column */}
           <div className="lg:col-span-1">
-            <h3 className="text-xl font-bold text-green-600 mb-4"> FreshCart</h3>
-            <p className="text-sm text-gray-600 mb-6">
-              Your one-stop destination for the latest technology, fashion, and lifestyle products. 
-              Quality guaranteed with fast shipping and excellent customer service.
+            {/* Logo */}
+            <div className="inline-flex items-center gap-2 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 mb-4">
+              <ShoppingCart className="text-green-400 w-5 h-5" />
+              <span className="text-white font-extrabold text-lg tracking-tight">FreshCart</span>
+            </div>
+
+            <p className="text-sm text-gray-400 leading-relaxed mb-6">
+              FreshCart is your <span className="text-green-400">one-stop destination</span> for quality products.
+              We bring you the best brands with a seamless shopping experience.
             </p>
-            <div className="text-sm text-gray-600 space-y-2">
-              <p>📍 123 Shop Street, October City, DC 12345</p>
-              <p>📞 (+20) 01093333333</p>
-              <p>✉️ support@shopmart.com</p>
+
+            <div className="space-y-2.5 text-sm">
+              <div className="flex items-center gap-2.5 text-gray-400">
+                <Phone className="w-4 h-4 text-green-400 shrink-0" />
+                <span>+1 (800) 123-4567</span>
+              </div>
+              <div className="flex items-center gap-2.5 text-gray-400">
+                <Mail className="w-4 h-4 text-green-400 shrink-0" />
+                <span>support@freshcart.com</span>
+              </div>
+              <div className="flex items-center gap-2.5 text-gray-400">
+                <MapPin className="w-4 h-4 text-green-400 shrink-0" />
+                <span>123 Commerce St, NY 10001</span>
+              </div>
+            </div>
+
+            {/* Social Icons */}
+            <div className="flex items-center gap-3 mt-6">
+              {[
+                { icon: <Facebook className="w-4 h-4" />, label: "Facebook" },
+                { icon: <Twitter className="w-4 h-4" />, label: "Twitter" },
+                { icon: <Instagram className="w-4 h-4" />, label: "Instagram" },
+                { icon: <Youtube className="w-4 h-4" />, label: "YouTube" },
+              ].map(({ icon, label }) => (
+                <button
+                  key={label}
+                  title={label}
+                  aria-label={label}
+                  className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 border border-gray-700 text-gray-400 hover:bg-green-600 hover:text-white hover:border-green-600 transition-all duration-200 active:scale-90"
+                >
+                  {icon}
+                </button>
+              ))}
             </div>
           </div>
 
+          {/* Shop Links */}
           <div>
-            <h4 className="font-bold text-gray-800 mb-4">SHOP</h4>
-            <ul className="text-sm text-gray-600 space-y-2">
-              <li><Link href="#" className="hover:text-green-600 transition">Electronics</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Fashion</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Home & Garden</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Sports</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Deals</Link></li>
+            <h4 className="text-white font-bold text-sm mb-5">Shop</h4>
+            <ul className="space-y-3 text-sm">
+              {["All Products", "Categories", "Electronics", "Fashion"].map((item) => (
+                <li key={item}>
+                  <Link
+                    href="/products"
+                    className="text-gray-400 hover:text-green-400 transition-colors duration-150"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
+          {/* Support Links */}
           <div>
-            <h4 className="font-bold text-gray-800 mb-4">CUSTOMER SERVICE</h4>
-            <ul className="text-sm text-gray-600 space-y-2">
-              <li><Link href="#" className="hover:text-green-600 transition">Contact Us</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Help Center</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Track Your Order</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Returns & Exchanges</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Size Guide</Link></li>
+            <h4 className="text-white font-bold text-sm mb-5">Support</h4>
+            <ul className="space-y-3 text-sm">
+              {["Contact Us", "Help Center", "Returns", "Track Order"].map((item) => (
+                <li key={item}>
+                  <Link
+                    href="#"
+                    className="text-gray-400 hover:text-green-400 transition-colors duration-150"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
+          {/* Subscribe */}
           <div>
-            <h4 className="font-bold text-gray-800 mb-4">ABOUT</h4>
-            <ul className="text-sm text-gray-600 space-y-2">
-              <li><Link href="#" className="hover:text-green-600 transition">About shopmart</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Careers</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Press</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Investor Relations</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Sustainability</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-gray-800 mb-4">POLICIES</h4>
-            <ul className="text-sm text-gray-600 space-y-2">
-              <li><Link href="#" className="hover:text-green-600 transition">Privacy Policy</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Terms of Service</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Cookie Policy</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Shipping Policy</Link></li>
-              <li><Link href="#" className="hover:text-green-600 transition">Refund Policy</Link></li>
-            </ul>
+            <h4 className="text-white font-bold text-sm mb-5">Subscribe</h4>
+            <p className="text-sm text-gray-400 mb-4 leading-relaxed">
+              Get the latest updates on new products and <span className="text-green-400">upcoming sales</span>.
+            </p>
+            <div className="flex gap-2">
+              <Input
+                type="email"
+                placeholder="Your email"
+                className="flex-1 bg-gray-800 border-gray-700 text-gray-200 placeholder:text-gray-500 focus-visible:ring-green-500 text-sm h-10 rounded-lg"
+              />
+              <Button className="bg-green-600 hover:bg-green-700 text-white font-bold text-sm h-10 px-4 rounded-lg shrink-0 transition-colors">
+                Join
+              </Button>
+            </div>
           </div>
         </div>
+      </div>
 
-        <hr className="my-8 border-gray-300" />
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-800">
+        <div className="container mx-auto w-[95%] lg:w-[90%] py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-gray-500">
+            © {new Date().getFullYear()} <span className="text-green-400 font-semibold">FreshCart</span>. All rights reserved.
+          </p>
 
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
-          <div className="flex flex-wrap justify-center items-center gap-4">
-            <span className="font-medium text-gray-700 mr-2">Payment Partners</span>
-            <div className="flex items-center gap-3">
-              <Image src={Amazon} alt="Amazon Pay" className="w-12 h-auto grayscale hover:grayscale-0 transition cursor-pointer" />
-              <Image src={AmericanImage} alt="American Express" className="w-12 h-auto grayscale hover:grayscale-0 transition cursor-pointer" />
-              <Image src={MasterCard} alt="MasterCard" className="w-12 h-auto grayscale hover:grayscale-0 transition cursor-pointer" />
-              <Image src={Paypal} alt="Paypal" className="w-12 h-auto grayscale hover:grayscale-0 transition cursor-pointer" />
-            </div>
+          {/* Payment Icons */}
+          <div className="flex items-center gap-2">
+            <Image src={Amazon} alt="Amazon Pay" className="h-7 w-auto opacity-60 hover:opacity-100 transition grayscale hover:grayscale-0" />
+            <Image src={MasterCard} alt="MasterCard" className="h-7 w-auto opacity-60 hover:opacity-100 transition grayscale hover:grayscale-0" />
+            <Image src={Paypal} alt="Paypal" className="h-7 w-auto opacity-60 hover:opacity-100 transition grayscale hover:grayscale-0" />
+            <Image src={AmericanImage} alt="American Express" className="h-7 w-auto opacity-60 hover:opacity-100 transition grayscale hover:grayscale-0" />
           </div>
-
-          <div className="flex flex-wrap justify-center items-center gap-4">
-            <span className="font-medium text-gray-700 mr-2">Get deliveries with FreshCart</span>
-            <div className="flex items-center gap-3">
-              <Image src={GetApple} alt="App Store" className="w-32 h-auto cursor-pointer hover:opacity-80 transition" />
-              <Image src={GetGoogle} alt="Google Play" className="w-32 h-auto cursor-pointer hover:opacity-80 transition" />
-            </div>
-          </div>
-        </div>
-
-        <hr className="my-8 border-gray-300" />
-
-        <div className="text-sm text-gray-500 text-center">
-          © {new Date().getFullYear()} FreshCart E-Commerce. All rights reserved.
         </div>
       </div>
     </footer>
-
-    </>
+  );
 }

@@ -161,7 +161,7 @@ export default async function Products({ searchParams }: PageProps) {
                 </Link>
               </div>
             ) : (
-              <GsapStagger className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" staggerAmount={0.04}>
+              <GsapStagger key={activeCategoryId ?? "all"} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" staggerAmount={0.04}>
                 {products.map((product) => (
                   <ProductCard product={product} key={product._id} />
                 ))}
